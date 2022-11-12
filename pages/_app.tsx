@@ -1,7 +1,7 @@
 import "../styles/globals.css"
-import type { AppProps } from "next/app"
+import type { AppContext, AppProps } from "next/app"
 import Head from "next/head"
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider, useSession } from "next-auth/react"
 
 export default function App({
 	Component,

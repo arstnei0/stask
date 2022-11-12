@@ -8,6 +8,7 @@ import { theme } from "../lib/muiTheme"
 import { Container, DropResult } from "react-smooth-dnd"
 import TaskList from "../components/TaskList"
 import { signIn, signOut, useSession } from "next-auth/react"
+import LoginedOnly from "../components/LoginedOnly"
 
 export interface Task {
 	id: number
@@ -38,20 +39,13 @@ export default function Home() {
 		},
 	])
 
-	const { data: session } = useSession()
-	if (session) {
-		return (
+	return <LoginedOnly>
+		{(session) => (
 			<>
-				Signed in as {session?.user?.email} <br />
+				Signed in as {session?.user?.name} <br />
 				<button onClick={() => signOut()}>Sign out</button>
+				<img src={session?.user?.image || undefined}></img>
 			</>
-		)
-	}
-
-	return (
-		<>
-			Not signed in <br />
-			<button onClick={() => signIn()}>Sign in</button>
-		</>
-	)
+		)}
+	</LoginedOnly>
 }
