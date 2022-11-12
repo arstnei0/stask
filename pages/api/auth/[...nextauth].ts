@@ -1,16 +1,14 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
-console.log(`Github ID: ${process.env.GITHUB_ID}`)
-console.log(`Github Secret: ${process.env.GITHUB_SECRET}`)
-
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
       clientSecret: process.env.GITHUB_SECRET as string,
     }),
   ],
+  secret: '2u3USyu5bVXKJeNYqMMyDugvbCUAkuS27E7ekPmDBak='
 }
 
 export default NextAuth(authOptions)

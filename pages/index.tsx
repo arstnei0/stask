@@ -47,6 +47,10 @@ export default function Home() {
 		</>
 		)
 	}
+
+	console.log(`Github ID: ${process.env.GITHUB_ID}`)
+	console.log(`Github Secret: ${process.env.GITHUB_SECRET}`)
+
 	return (
 		<>
 			Not signed in <br />
