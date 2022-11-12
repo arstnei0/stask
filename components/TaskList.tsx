@@ -1,13 +1,13 @@
-import { Dispatch, FunctionComponent, SetStateAction } from "react";
-import { Container, DropResult } from "react-smooth-dnd";
-import { Task } from "../pages";
-import T from "./Task";
+import { Dispatch, FunctionComponent, SetStateAction } from "react"
+import { Container, DropResult } from "react-smooth-dnd"
+import { Task } from "../pages"
+import T from "./Task"
 
 interface TaskListProps {
-    tasks: Task[]
-    setTasks?: Dispatch<SetStateAction<Task[]>>
+	tasks: Task[]
+	setTasks?: Dispatch<SetStateAction<Task[]>>
 }
- 
+
 const TaskList: FunctionComponent<TaskListProps> = ({ tasks, setTasks }) => {
 	const C = Container as any
 
@@ -32,17 +32,19 @@ const TaskList: FunctionComponent<TaskListProps> = ({ tasks, setTasks }) => {
 				return result
 			})
 	}
-    
-    return <C onDrop={onDrop}>
-        {tasks.map((task, index) => (
-            <T
-                key={task.id}
-                index={index}
-                id={task.id}
-                title={task.title}
-            />
-        ))}
-    </C>
+
+	return (
+		<C onDrop={onDrop}>
+			{tasks.map((task, index) => (
+				<T
+					key={task.id}
+					index={index}
+					id={task.id}
+					title={task.title}
+				/>
+			))}
+		</C>
+	)
 }
- 
-export default TaskList;
+
+export default TaskList

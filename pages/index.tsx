@@ -7,7 +7,7 @@ import Task from "../components/Task"
 import { theme } from "../lib/muiTheme"
 import { Container, DropResult } from "react-smooth-dnd"
 import TaskList from "../components/TaskList"
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from "next-auth/react"
 
 export interface Task {
 	id: number
@@ -41,10 +41,10 @@ export default function Home() {
 	const { data: session } = useSession()
 	if (session) {
 		return (
-		<>
-			Signed in as {session?.user?.email} <br />
-			<button onClick={() => signOut()}>Sign out</button>
-		</>
+			<>
+				Signed in as {session?.user?.email} <br />
+				<button onClick={() => signOut()}>Sign out</button>
+			</>
 		)
 	}
 
