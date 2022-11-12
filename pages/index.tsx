@@ -5,11 +5,12 @@ import { useCallback, useEffect, useState } from "react"
 import styles from "../styles/Home.module.css"
 import Task from "../components/Task"
 import { theme } from "../lib/muiTheme"
-import NonSSRWrapper from "../components/NonSSRWrapper"
 import { Container, DropResult } from "react-smooth-dnd"
+import TaskList from "../components/TaskList"
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 export interface Task {
-	id: string
+	id: number
 	title: string
 }
 
@@ -18,70 +19,44 @@ const style = {
 }
 
 export default function Home() {
-	const C = Container as any
-
 	const [tasks, setTasks] = useState<Task[]>([
 		{
-			title: "1111",
-			id: "t1",
+			title: "Complete stask",
+			id: 1,
 		},
 		{
-			title: "2222",
-			id: "t2",
+			title: "Add react-smooth-dnd",
+			id: 2,
 		},
 		{
-			title: "3333",
-			id: "t3",
+			title: "Science homework",
+			id: 3,
 		},
 		{
 			title: "4444",
-			id: "t4",
+			id: 4,
 		},
 	])
 
-	const onDrop = (dropResult: DropResult) => {
-		const { removedIndex, addedIndex, payload, element } = dropResult
-
-		if (removedIndex !== null && addedIndex !== null)
-			setTasks((prevTasks: Task[]) => {
-				if (removedIndex === null && addedIndex === null) return []
-
-				const result = [...prevTasks]
-				let itemToAdd = payload
-
-				if (removedIndex !== null) {
-					itemToAdd = result.splice(removedIndex, 1)[0]
-				}
-
-				if (addedIndex !== null) {
-					result.splice(addedIndex, 0, itemToAdd)
-				}
-
-				return result
-			})
+	const { data: session } = useSession()
+	if (session) {
+		return (
+		<>
+			Signed in as {session?.user?.email} <br />
+			<button onClick={() => signOut()}>Sign out</button>
+		</>
+		)
 	}
-
-	const [winReady, setwinReady] = useState(false)
-	useEffect(() => {
-		setwinReady(true)
-	}, [])
-
-	const onDragEnd = (result: any) => {
-		return result
-	}
+	return (
+		<>
+		Not signed in <br />
+		<button onClick={() => signIn()}>Sign in</button>
+		</>
+	)
 
 	return (
 		<ThemeProvider theme={theme}>
-			<C onDrop={onDrop}>
-				{tasks.map((task, index) => (
-					<Task
-						key={task.id}
-						index={index}
-						id={task.id}
-						title={task.title}
-					/>
-				))}
-			</C>
+			{/* <TaskList tasks={tasks} setTasks={setTasks}></TaskList> */}
 		</ThemeProvider>
 	)
 }

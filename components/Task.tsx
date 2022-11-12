@@ -7,7 +7,7 @@ import styles from "../styles/Task.module.css"
 interface TaskProps {
 	title: Task["title"]
 	index: number
-	id: string
+	id: number
 }
 
 const Task: FunctionComponent<TaskProps> = ({ title, index, id }) => {

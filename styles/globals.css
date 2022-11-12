@@ -1,8 +1,15 @@
+@import "./fonts.css";
+
 body {
 	display: flex;
 	justify-content: center;
+	--sans: "Ysabeau", sans-serif;
 }
 
 main {
 	margin-top: 30px;
+}
+
+* {
+	font-family: var(--sans);
 }

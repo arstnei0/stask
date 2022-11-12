@@ -1,5 +1,6 @@
 .task {
-	margin: 5px;
+	margin: 2px;
 	cursor: move;
 	width: 500px;
+	font-size: 1.4em;
 }
