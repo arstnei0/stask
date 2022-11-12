@@ -1,74 +1,87 @@
-import { Button, Card, CardContent } from "@mui/material"
+import { Button, Card, CardContent, ThemeProvider } from "@mui/material"
 import Head from "next/head"
 import Image from "next/image"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import styles from "../styles/Home.module.css"
-import { DndProvider } from "react-dnd"
-import { HTML5Backend } from "react-dnd-html5-backend"
 import Task from "../components/Task"
+import { theme } from "../lib/muiTheme"
+import NonSSRWrapper from "../components/NonSSRWrapper"
+import { Container, DropResult } from "react-smooth-dnd"
 
 export interface Task {
-	id: number
+	id: string
 	title: string
 }
 
 const style = {
 	width: 400,
-  }
+}
 
 export default function Home() {
+	const C = Container as any
+
 	const [tasks, setTasks] = useState<Task[]>([
 		{
 			title: "1111",
-			id: 1,
+			id: "t1",
 		},
 		{
 			title: "2222",
-			id: 2,
+			id: "t2",
 		},
 		{
 			title: "3333",
-			id: 3,
+			id: "t3",
 		},
 		{
 			title: "4444",
-			id: 4,
+			id: "t4",
 		},
 	])
 
-	const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-		setTasks((prevTasks: Task[]) => {
-				let tasks = [...prevTasks]
-				const poped = tasks.splice(dragIndex, 1)
-				tasks.splice(hoverIndex, 0, ...poped)
+	const onDrop = (dropResult: DropResult) => {
+		const { removedIndex, addedIndex, payload, element } = dropResult
 
-				console.log(tasks)
-				return tasks
-			}
-		)
+		if (removedIndex !== null && addedIndex !== null)
+			setTasks((prevTasks: Task[]) => {
+				if (removedIndex === null && addedIndex === null) return []
 
-		// console.log(tasks)
+				const result = [...prevTasks]
+				let itemToAdd = payload
+
+				if (removedIndex !== null) {
+					itemToAdd = result.splice(removedIndex, 1)[0]
+				}
+
+				if (addedIndex !== null) {
+					result.splice(addedIndex, 0, itemToAdd)
+				}
+
+				return result
+			})
+	}
+
+	const [winReady, setwinReady] = useState(false)
+	useEffect(() => {
+		setwinReady(true)
 	}, [])
 
-	const renderTask = useCallback((task: Task, index: number) => {
-		// console.log(task)
-		
-		return (
-			<Task
-				key={task.id}
-				index={index}
-				id={task.id}
-				title={task.title}
-				moveCard={moveCard}
-			/>
-		)
-	}, [])
+	const onDragEnd = (result: any) => {
+		return result
+	}
 
 	return (
-		<DndProvider backend={HTML5Backend}>
-			<div style={style}>
-				{tasks.map((task, index) => renderTask(task, index))}
-			</div>
-		</DndProvider>
+		<ThemeProvider theme={theme}>
+			<C onDrop={onDrop}>
+				{tasks.map((task, index) => (
+					<Task
+						key={task.id}
+						index={index}
+						id={task.id}
+						title={task.title}
+					/>
+				))}
+			</C>
+		</ThemeProvider>
 	)
 }

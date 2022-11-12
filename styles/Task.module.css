@@ -1,4 +1,5 @@
 .task {
 	margin: 5px;
 	cursor: move;
+	width: 500px;
 }
