@@ -1,11 +1,27 @@
-import { Dispatch, FunctionComponent, SetStateAction, useEffect, useState } from "react"
+import {
+	Dispatch,
+	FunctionComponent,
+	SetStateAction,
+	useEffect,
+	useState,
+} from "react"
 import { Container, DropResult } from "react-smooth-dnd"
 import { Task } from "../lib/tasks"
 import T from "./Task"
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import AddRoundedIcon from "@mui/icons-material/AddRounded"
 import { useStore } from "@nanostores/react"
 import { createTask, getId, moveTask, tasks as tasksStore } from "../lib/tasks"
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Icon, IconButton, TextField, Tooltip } from "@mui/material"
+import {
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	Icon,
+	IconButton,
+	TextField,
+	Tooltip,
+} from "@mui/material"
 
 interface TaskListProps {}
 
@@ -21,9 +37,9 @@ const TaskList: FunctionComponent<TaskListProps> = () => {
 			moveTask(removedIndex, addedIndex)
 	}
 
-	const [openDialog, setOpenDialog] = useState(false);
+	const [openDialog, setOpenDialog] = useState(false)
 	const closeDialog = () => setOpenDialog(false)
-	const [newTaskTitle, setNewTaskTitle] = useState('');
+	const [newTaskTitle, setNewTaskTitle] = useState("")
 
 	return (
 		<>
@@ -33,11 +49,13 @@ const TaskList: FunctionComponent<TaskListProps> = () => {
 			>
 				Add
 			</Button> */}
-			<div style={{
-				display: 'flex',
-				justifyContent: 'center',
-				marginBottom: '1em',
-			}}>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "center",
+					marginBottom: "1em",
+				}}
+			>
 				<Tooltip title="Create a new task">
 					<IconButton onClick={() => setOpenDialog(true)}>
 						<AddRoundedIcon color="primary"></AddRoundedIcon>
@@ -55,18 +73,24 @@ const TaskList: FunctionComponent<TaskListProps> = () => {
 						label="Task title"
 						fullWidth
 						variant="standard"
-						onInput={(e) => setNewTaskTitle((e.target as any).value)}
+						onInput={(e) =>
+							setNewTaskTitle((e.target as any).value)
+						}
 					/>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={closeDialog}>Cancel</Button>
-					<Button onClick={() => {
-						createTask({
-							title: newTaskTitle
-						})
+					<Button
+						onClick={() => {
+							createTask({
+								title: newTaskTitle,
+							})
 
-						closeDialog()
-					}}>Create</Button>
+							closeDialog()
+						}}
+					>
+						Create
+					</Button>
 				</DialogActions>
 			</Dialog>
 

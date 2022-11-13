@@ -39,14 +39,15 @@ export const moveTask = (removedIndex: number, addedIndex: number) => {
 	tasks.set(result)
 }
 
-export const createTask = ({ title }: {
-	title: string
-}) => {
-	tasks.set([{
-		title, 
-		id: getId(),
-		done: false,
-	}, ...tasks.get()])
+export const createTask = ({ title }: { title: string }) => {
+	tasks.set([
+		{
+			title,
+			id: getId(),
+			done: false,
+		},
+		...tasks.get(),
+	])
 }
 
 export const getId = () => tasks.get().length + 1
@@ -56,8 +57,14 @@ export const deleteTask = (id: number) => {
 }
 
 export const doneTask = (id: number) => {
-	tasks.set(tasks.get().map((task) => (task.id === id ? {
-		...task,
-		done: true,
-	} : task)))
+	tasks.set(
+		tasks.get().map((task) =>
+			task.id === id
+				? {
+						...task,
+						done: true,
+				  }
+				: task
+		)
+	)
 }
