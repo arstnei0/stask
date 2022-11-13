@@ -11,11 +11,6 @@ import { signIn, signOut, useSession } from "next-auth/react"
 import LoginedOnly from "../components/LoginedOnly"
 import * as tasks from "../lib/tasks"
 
-export interface Task {
-	id: number
-	title: string
-}
-
 const style = {
 	width: 400,
 }

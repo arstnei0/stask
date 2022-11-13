@@ -1,42 +1,63 @@
 import { atom } from "nanostores"
-import { createContext, useState } from "react"
-import { Task } from "../pages"
 
-// export const [tasks, setTasks] = useState<Task[]>()
+export interface Task {
+	id: number
+	title: string
+	done: boolean
+}
 
 export const tasks = atom<Task[]>([
-    {
-        title: "Complete stask",
-        id: 1,
-    },
-    {
-        title: "Add react-smooth-dnd",
-        id: 2,
-    },
-    {
-        title: "Science homework",
-        id: 3,
-    },
-    {
-        title: "4444",
-        id: 4,
-    },
+	{
+		title: "Complete stask",
+		id: 1,
+		done: false,
+	},
+	{
+		title: "Add react-smooth-dnd",
+		id: 2,
+		done: false,
+	},
+	{
+		title: "Science homework",
+		id: 3,
+		done: false,
+	},
+	{
+		title: "4444",
+		id: 4,
+		done: false,
+	},
 ])
 
 export const moveTask = (removedIndex: number, addedIndex: number) => {
-    const result = [...tasks.get()]
-    
-    const itemToAdd = result.splice(removedIndex - 1, 1)[0]
+	const result = [...tasks.get()]
 
-    result.splice(addedIndex - 1, 0, itemToAdd)
-    
-    tasks.set(result)
+	const itemToAdd = result.splice(removedIndex, 1)[0]
 
-    console.log(removedIndex, addedIndex)
+	result.splice(addedIndex, 0, itemToAdd)
+
+	tasks.set(result)
 }
 
-export const addTask = (task: Task) => {
-    tasks.set([task, ...tasks.get()])
+export const createTask = ({ title }: {
+	title: string
+}) => {
+	tasks.set([{
+		title, 
+		id: getId(),
+		done: false,
+	}, ...tasks.get()])
 }
 
 export const getId = () => tasks.get().length + 1
+
+export const deleteTask = (id: number) => {
+	tasks.set(tasks.get().filter((task) => task.id !== id))
+}
+
+export const doneTask = (id: number) => {
+	tasks.set(tasks.get().map((task) => (task.id === id ? {
+		...task,
+		done: true,
+	} : task)))
+}
