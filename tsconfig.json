@@ -22,7 +22,8 @@
 		"pages/index.tjsx",
 		"components/Task.tsx",
 		"components/Task.tsx",
-		"pages/_app.jsx"
+		"pages/_app.jsx",
+		"pages/middleware.js"
 	],
 	"exclude": ["node_modules"]
 }
