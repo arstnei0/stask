@@ -17,6 +17,7 @@
 		"@mui/icons-material": "^5.10.9",
 		"@mui/material": "^5.10.13",
 		"@nanostores/react": "^0.4.0",
+		"@next-auth/mongodb-adapter": "^1.1.1",
 		"@types/react": "18.0.25",
 		"@types/react-dom": "18.0.8",
 		"eslint": "8.27.0",

@@ -8,6 +8,7 @@ specifiers:
   '@mui/icons-material': ^5.10.9
   '@mui/material': ^5.10.13
   '@nanostores/react': ^0.4.0
+  '@next-auth/mongodb-adapter': ^1.1.1
   '@types/node': 18.11.9
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
@@ -31,6 +32,7 @@ dependencies:
   '@mui/icons-material': 5.10.9_4tcfjhohj57yvze6zkot3vymie
   '@mui/material': 5.10.13_thp4wrxo45nyllusrnt46mid4u
   '@nanostores/react': 0.4.0_kumziggp74xxkphhh7wyh33hzm
+  '@next-auth/mongodb-adapter': 1.1.1_pygjy7ud5c2ssgwjau7evro5zi
   '@types/react': 18.0.25
   '@types/react-dom': 18.0.8
   eslint: 8.27.0
@@ -1284,6 +1286,16 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /@next-auth/mongodb-adapter/1.1.1_pygjy7ud5c2ssgwjau7evro5zi:
+    resolution: {integrity: sha512-X5O4U4l2M8nyp/B3qF5GOr/JJw2ShKgWfTZRa80Y5CUzTPPmf09ggL5v5UwCmz9l2RIv2GUxO8hK4qrcaZvDRw==}
+    peerDependencies:
+      mongodb: ^4.1.1
+      next-auth: ^4
+    dependencies:
+      mongodb: 4.11.0
+      next-auth: 4.16.4_ogpkrxaz2lg6nectum6dl66tn4
     dev: false
 
   /@next/env/13.0.3:
