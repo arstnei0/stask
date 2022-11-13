@@ -4,6 +4,7 @@ body {
 	display: flex;
 	justify-content: center;
 	--sans: "Ysabeau", sans-serif;
+	/* --sans: "Roboto", sans-serif; */
 }
 
 main {
@@ -11,5 +12,5 @@ main {
 }
 
 * {
-	font-family: var(--sans);
+	font-family: var(--sans) !important;
 }

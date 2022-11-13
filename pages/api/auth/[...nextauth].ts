@@ -10,8 +10,8 @@ export const authOptions: NextAuthOptions = {
 	],
 	secret: "2u3USyu5bVXKJeNYqMMyDugvbCUAkuS27E7ekPmDBak=",
 	pages: {
-		signIn: '/login',
-		signOut: '/lougout'
+		signIn: "/login",
+		signOut: "/lougout",
 	},
 }
 

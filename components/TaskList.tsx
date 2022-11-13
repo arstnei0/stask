@@ -2,38 +2,30 @@ import { Dispatch, FunctionComponent, SetStateAction } from "react"
 import { Container, DropResult } from "react-smooth-dnd"
 import { Task } from "../pages"
 import T from "./Task"
+import {useStore} from '@nanostores/react'
+import { addTask, getId, moveTask, tasks as tasksStore } from "../lib/tasks"
+import { Button } from "@mui/material"
 
 interface TaskListProps {
-	tasks: Task[]
-	setTasks?: Dispatch<SetStateAction<Task[]>>
+	
 }
 
-const TaskList: FunctionComponent<TaskListProps> = ({ tasks, setTasks }) => {
+const TaskList: FunctionComponent<TaskListProps> = () => {
+	const tasks = useStore(tasksStore)
+
 	const C = Container as any
 
 	const onDrop = (dropResult: DropResult) => {
 		const { removedIndex, addedIndex, payload, element } = dropResult
 
-		if (removedIndex !== null && addedIndex !== null)
-			setTasks?.((prevTasks: Task[]) => {
-				if (removedIndex === null && addedIndex === null) return []
-
-				const result = [...prevTasks]
-				let itemToAdd = payload
-
-				if (removedIndex !== null) {
-					itemToAdd = result.splice(removedIndex, 1)[0]
-				}
-
-				if (addedIndex !== null) {
-					result.splice(addedIndex, 0, itemToAdd)
-				}
-
-				return result
-			})
+		if (removedIndex !== null && addedIndex !== null) moveTask(removedIndex, addedIndex)
 	}
 
-	return (
+	return <>
+		<Button onClick={() => addTask({
+			title: 'new task', 
+			id: getId()
+		})}>Add</Button>
 		<C onDrop={onDrop}>
 			{tasks.map((task, index) => (
 				<T
@@ -44,7 +36,7 @@ const TaskList: FunctionComponent<TaskListProps> = ({ tasks, setTasks }) => {
 				/>
 			))}
 		</C>
-	)
+	</>
 }
 
 export default TaskList

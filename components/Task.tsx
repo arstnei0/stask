@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@mui/material"
+import { Card, CardActions, CardContent, CardHeader } from "@mui/material"
 import { FunctionComponent, useRef } from "react"
 import { Draggable } from "react-smooth-dnd"
 import { Task } from "../pages"
@@ -17,7 +17,12 @@ const Task: FunctionComponent<TaskProps> = ({ title, index, id }) => {
 		<D key={id}>
 			<div className={styles.task}>
 				<Card>
-					<CardContent>{title}</CardContent>
+					<CardHeader
+						title={title}
+						action={
+							<></>
+						}
+					></CardHeader>
 				</Card>
 			</div>
 		</D>
